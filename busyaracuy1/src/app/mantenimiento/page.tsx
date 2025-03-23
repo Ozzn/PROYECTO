@@ -108,7 +108,7 @@ const MaintenanceForm: React.FC = () => {
 
           {/* FORMULARIO */}
           <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow-md grid grid-cols-2 gap-4">
-            <select value={unidad} onChange={(e) => setUnidad(e.target.value)} className="p-2 border rounded">
+            <select value={unidad} onChange={(e) => setUnidad(e.target.value)} className="p-2 border rounded text-gray-700">
               <option value="">Seleccionar Unidad</option>
               {unidades.map((unidad) => (
                 <option key={unidad.id} value={unidad.id}>
@@ -117,9 +117,15 @@ const MaintenanceForm: React.FC = () => {
               ))}
             </select>
 
-            <input type="text" className="p-2 border rounded" placeholder="Ruta de la Unidad" value={rutaUnidad} onChange={(e) => setRutaUnidad(e.target.value)} />
+            <input
+              type="text"
+              className="p-2 border rounded text-gray-700"
+              placeholder="Ruta de la Unidad"
+              value={rutaUnidad}
+              onChange={(e) => setRutaUnidad(e.target.value)}
+            />
 
-            <select value={operador} onChange={(e) => setOperador(e.target.value)} className="p-2 border rounded">
+            <select value={operador} onChange={(e) => setOperador(e.target.value)} className="p-2 border rounded text-gray-700">
               <option value="">Seleccionar Operador</option>
               {operadores.map((operador) => (
                 <option key={operador.id} value={operador.id}>
@@ -128,7 +134,7 @@ const MaintenanceForm: React.FC = () => {
               ))}
             </select>
 
-            <select value={mecanico} onChange={(e) => setMecanico(e.target.value)} className="p-2 border rounded">
+            <select value={mecanico} onChange={(e) => setMecanico(e.target.value)} className="p-2 border rounded text-gray-700">
               <option value="">Seleccionar Mecánico</option>
               {mecanicos.map((mecanico) => (
                 <option key={mecanico.id} value={mecanico.id}>
@@ -137,26 +143,52 @@ const MaintenanceForm: React.FC = () => {
               ))}
             </select>
 
-            <input type="text" className="p-2 border rounded" placeholder="Kilometraje" value={kilometraje} onChange={(e) => setKilometraje(e.target.value)} />
+            <input
+              type="text"
+              className="p-2 border rounded text-gray-700"
+              placeholder="Kilometraje"
+              value={kilometraje}
+              onChange={(e) => setKilometraje(e.target.value)}
+            />
 
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 text-gray-700  ">
               <label className="flex items-center">
-                <input type="radio" name="tipo" value="p" checked={tipo === "p"} onChange={() => setTipo("p")} className="mr-2" />
+                <input type="radio" name="tipo" value="p" checked={tipo === "p"} onChange={() => setTipo("p")} className="mr-2 " />
                 Preventivo
               </label>
               <label className="flex items-center">
-                <input type="radio" name="tipo" value="c" checked={tipo === "c"} onChange={() => setTipo("c")} className="mr-2" />
+                <input type="radio" name="tipo" value="c" checked={tipo === "c"} onChange={() => setTipo("c")} className="mr-2 " />
                 Correctivo
               </label>
             </div>
 
-            <input type="date" className="p-2 border rounded" value={fechaEntrada} onChange={(e) => setFechaEntrada(e.target.value)} />
+            <input
+              type="date"
+              className="p-2 border rounded text-gray-700"
+              value={fechaEntrada}
+              onChange={(e) => setFechaEntrada(e.target.value)}
+            />
 
-            <input type="text" className="p-2 border rounded" placeholder="Diagnóstico" value={diagnostico} onChange={(e) => setDiagnostico(e.target.value)} />
+            <input
+              type="text"
+              className="p-2 border rounded text-gray-700"
+              placeholder="Diagnóstico"
+              value={diagnostico}
+              onChange={(e) => setDiagnostico(e.target.value)}
+            />
 
-            <input type="text" className="p-2 border rounded" placeholder="Recomendación" value={recomendacion} onChange={(e) => setRecomendacion(e.target.value)} />
+            <input
+              type="text"
+              className="p-2 border rounded text-gray-700"
+              placeholder="Recomendación"
+              value={recomendacion}
+              onChange={(e) => setRecomendacion(e.target.value)}
+            />
 
-            <button type="submit" className="col-span-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            <button
+              type="submit"
+              className="col-span-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm"
+            >
               Ingresar Mantenimiento
             </button>
           </form>

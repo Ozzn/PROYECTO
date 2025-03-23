@@ -5,7 +5,7 @@ export default function Home() {
         Bienvenido a BUSYARACUY
       </h1>
       <p className="text-lg text-gray-600 mb-6">
-        Por favor, inicia sesión o regístrate.
+        Por favor, inicia sesión o regístrate
       </p>
       <div className="space-x-4">
         <a

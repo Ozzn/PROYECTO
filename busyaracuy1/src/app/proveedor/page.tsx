@@ -71,52 +71,46 @@ const Proveedor: React.FC = () => {
     <div className="flex">
       <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className={`flex-1 bg-gray-100 min-h-screen p-6 transition-all duration-300 ${menuOpen ? "ml-64" : "ml-0 md:ml-64"}`}>
-        <h4 className="text-lg font-semibold mb-4">Agregar Proveedor</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-4">Agregar Proveedor</h4>
 
-        {/* FORMULARIO */}
-        <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow-md">
-          {/* Primera fila: 4 inputs más pequeños */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
-            <input type="text" className="p-2 border rounded text-sm w-40" placeholder="RIF" value={rif} onChange={(e) => setRif(e.target.value)} />
-            <input type="text" className="p-2 border rounded text-sm w-40" placeholder="Empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value)} />
-            <input type="text" className="p-2 border rounded text-sm w-40" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            <input type="text" className="p-2 border rounded text-sm w-40" placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} />
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+            <input type="text" className="p-3 border rounded text-gray-900 text-sm" placeholder="RIF" value={rif} onChange={(e) => setRif(e.target.value)} />
+            <input type="text" className="p-3 border rounded text-gray-900 text-sm" placeholder="Empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value)} />
+            <input type="text" className="p-3 border rounded text-gray-900 text-sm" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <input type="text" className="p-3 border rounded text-gray-900 text-sm" placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} />
           </div>
 
-          {/* Segunda fila: 2 inputs más pequeños + botón más compacto */}
-          <div className="flex items-center gap-2">
-            <input type="text" className="p-2 border rounded text-sm w-32" placeholder="Teléfono" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
-            <input type="email" className="p-2 border rounded text-sm w-32" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <button type="submit" className="bg-blue-500 text-white px-3 py-1 rounded text-xs w-24 hover:bg-blue-600">
-              + Agregar
-            </button>
+          <div className="flex items-center gap-4">
+            <input type="text" className="p-3 border rounded text-gray-900 text-sm" placeholder="Teléfono" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+            <input type="email" className="p-3 border rounded text-gray-900 text-sm" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-opacity-80">+ Agregar</button>
           </div>
         </form>
 
-        {/* TABLA */}
         <div className="mt-6">
-          <div className="flex justify-between items-center mb-2">
-            <label className="text-sm">Mostrar: 
+          <div className="flex justify-between items-center mb-4">
+            <label className="text-sm text-gray-700">Mostrar: 
               <select className="ml-2 p-1 border rounded text-sm">
                 <option>10</option>
                 <option>25</option>
                 <option>50</option>
               </select>
             </label>
-            <input type="text" placeholder="Buscar..." className="p-1 border rounded text-sm w-40" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+            <input type="text" placeholder="Buscar..." className="p-2 border rounded text-sm w-40" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
           </div>
 
           <table className="w-full border-collapse border border-gray-300 text-sm">
             <thead className="bg-gray-800 text-white">
               <tr>
                 {["COD", "RIF", "EMPRESA", "NOMBRE, APELLIDO", "TELÉFONO", "EMAIL", "STATUS", "ACCIONES"].map((header, index) => (
-                  <th key={index} className="border p-2">{header}</th>
+                  <th key={index} className="border p-2 text-gray-100">{header}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {proveedores.filter(p => p.empresa.toLowerCase().includes(busqueda.toLowerCase())).map((prov, index) => (
-                <tr key={prov.id} className="text-center">
+                <tr key={prov.id} className="text-center text-gray-900">
                   <td className="border p-2">{index + 1}</td>
                   <td className="border p-2">{prov.rif}</td>
                   <td className="border p-2">{prov.empresa}</td>
@@ -138,7 +132,6 @@ const Proveedor: React.FC = () => {
             </tbody>
           </table>
 
-          {/* PAGINACIÓN */}
           <div className="flex justify-between items-center mt-4 text-sm">
             <p>Total de {proveedores.length} Registros</p>
             <div className="flex space-x-2">
@@ -147,7 +140,6 @@ const Proveedor: React.FC = () => {
               <button className="px-3 py-1 border rounded bg-gray-300 hover:bg-gray-400">Siguiente</button>
             </div>
           </div>
-
         </div>
       </div>
     </div>

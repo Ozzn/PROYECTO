@@ -3,9 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export default function Navbar() {
+interface NavbarProps {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
+}
+
+export default function Navbar({ menuOpen, setMenuOpen }: NavbarProps) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const toggleDropdown = (menu: string) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
@@ -15,7 +19,7 @@ export default function Navbar() {
     <>
       {/* Botón para abrir el menú en dispositivos móviles */}
       <button
-        className="md:hidden fixed top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50"
+        className="md:hidden fixed top-4 left-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-full z-50 shadow-lg transform transition-all duration-300 hover:scale-110"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         ☰
@@ -23,23 +27,49 @@ export default function Navbar() {
 
       {/* Menú lateral */}
       <nav
-        className={`fixed top-0 left-0 h-screen bg-blue-600 text-white p-4 transition-transform duration-300
-        ${menuOpen ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0 md:w-64 md:block`}
+        className={`fixed top-0 left-0 bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 transition-all duration-500 ease-in-out transform
+        ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:w-60 md:block shadow-xl`}
+        style={{
+          zIndex: 50,
+          height: "100%", // Mantiene la altura al 100% de la pantalla
+        }}
       >
-        <div className="flex flex-col space-y-4">
-          <button className="text-xl font-bold mb-4 block" onClick={() => setMenuOpen(false)}>
+        <div className="flex flex-col space-y-6 overflow-y-auto" style={{ height: "100%" }}>
+          {/* Icono de cierre */}
+          <button
+            className="text-3xl absolute top-6 right-6 text-gray-200 hover:text-white"
+            onClick={() => setMenuOpen(false)}
+          >
+            ✖
+          </button>
+
+          {/* Logo o nombre */}
+          <div className="text-2xl font-semibold text-center mb-6 text-gray-200">
+            <h1>Mi Menú</h1>
+          </div>
+
+          {/* INICIO */}
+          <button
+            className="text-xl font-bold text-gray-100 py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+            onClick={() => setMenuOpen(false)}
+          >
             INICIO
           </button>
 
           {/* ALMACEN */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("almacen")}>
-              ALMACEN ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("almacen")}
+            >
+              ALMACEN <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "almacen" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/almacen" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/almacen"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Almacen
                 </Link>
               </div>
@@ -48,18 +78,30 @@ export default function Navbar() {
 
           {/* DATA */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("data")}>
-              DATA ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("data")}
+            >
+              DATA <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "data" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/data" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/data"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Data
                 </Link>
-                <Link href="" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+                <Link
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Scanner
                 </Link>
-                <Link href="" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+                <Link
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Cleandesp
                 </Link>
               </div>
@@ -68,12 +110,18 @@ export default function Navbar() {
 
           {/* ESTACION */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("estacion")}>
-              ESTACION ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("estacion")}
+            >
+              ESTACION <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "estacion" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/estacion" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/estacion"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Estacion
                 </Link>
               </div>
@@ -82,12 +130,18 @@ export default function Navbar() {
 
           {/* OPCIONES AVANZADAS */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("menu")}>
-              Opciones avanzadas ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("menu")}
+            >
+              Opciones avanzadas <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "menu" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/menu" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/menu"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Crear menú
                 </Link>
               </div>
@@ -96,12 +150,18 @@ export default function Navbar() {
 
           {/* PERSONAL */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("personal")}>
-              PERSONAL ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("personal")}
+            >
+              PERSONAL <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "personal" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/personal" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/personal"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Usuarios
                 </Link>
               </div>
@@ -110,12 +170,18 @@ export default function Navbar() {
 
           {/* PROVEEDOR */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("proveedor")}>
-              PROVEEDOR ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("proveedor")}
+            >
+              PROVEEDOR <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "proveedor" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/proveedor" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/proveedor"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Proveedor
                 </Link>
               </div>
@@ -124,15 +190,24 @@ export default function Navbar() {
 
           {/* UNIDADES */}
           <div className="relative">
-            <button className="w-full text-left px-4 py-2 bg-blue-700 rounded-md" onClick={() => toggleDropdown("unidades")}>
-              UNIDADES ▼
+            <button
+              className="w-full text-left py-2 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-lg hover:bg-gradient-to-l transition-all duration-300"
+              onClick={() => toggleDropdown("unidades")}
+            >
+              UNIDADES <span className="ml-2">&#9660;</span>
             </button>
             {openDropdown === "unidades" && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link href="/flota" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+              <div className="ml-4 mt-2 space-y-2 bg-blue-800 p-2 rounded-lg shadow-lg">
+                <Link
+                  href="/flota"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Flota
                 </Link>
-                <Link href="/mantenimiento" className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md">
+                <Link
+                  href="/mantenimiento"
+                  className="block px-4 py-2 hover:bg-gray-200 text-black rounded-md"
+                >
                   Mantenimiento
                 </Link>
               </div>

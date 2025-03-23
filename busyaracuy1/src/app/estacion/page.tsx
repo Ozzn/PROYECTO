@@ -19,96 +19,97 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen overflow-auto">
-      {/* Ajuste para el menú lateral */}
-      <div className="w-[250px] bg-gray-800 text-white hidden md:block">
+    <div className="flex min-h-screen overflow-auto bg-gray-100">
+      {/* Menú Lateral */}
+      <div className="w-[250px] bg-gray-900 text-white hidden md:block p-4">
         {/* Aquí iría el menú lateral */}
       </div>
 
       {/* Contenedor Principal */}
-      <div className="flex-1 p-4 ml-0 md:ml-[250px]">
-        <div className="flex justify-between space-x-4">
+      <div className="flex-1 p-6 ml-0 md:ml-[250px]">
+        <div className="flex justify-between space-x-6">
           {/* Formulario y Tasa */}
-          <div className="w-3/4 space-y-4">
+          <div className="w-3/4 space-y-6">
             {/* Tasa del Día */}
-            <div className="bg-white shadow rounded p-4">
-              <h5 className="font-semibold">TASA DEL DÍA</h5>
-              <div className="flex items-center gap-4 mt-2">
-                <span className="text-3xl font-bold text-gray-600">EJ</span>
+            <div className="bg-white shadow-lg rounded-lg p-6">
+              <h5 className="font-bold text-gray-900 text-lg">TASA DEL DÍA</h5>
+              <div className="flex items-center gap-4 mt-3">
+                <span className="text-4xl font-extrabold text-gray-700">EJ</span>
                 <input
                   type="text"
-                  className="border p-2 text-3xl font-semibold w-32 text-center"
+                  className="border p-3 text-3xl font-bold w-32 text-center rounded-md focus:ring-2 focus:ring-blue-400"
                   value={tasa}
                   onChange={(e) => setTasa(e.target.value)}
                 />
-                <button className="bg-blue-600 text-white px-4 py-2 rounded">
+                <button className="bg-blue-600 text-white px-5 py-3 rounded-md text-sm font-semibold hover:bg-opacity-80">
                   ACTUALIZAR
                 </button>
               </div>
             </div>
 
             {/* Formulario de Venta */}
-            <div className="bg-white shadow rounded p-4">
-              <div className="grid grid-cols-4 gap-4">
+            <div className="bg-white shadow-lg rounded-lg p-6">
+              <div className="grid grid-cols-4 gap-6">
+                {[
+                  { label: "NOMBRE", type: "text", placeholder: "Nombre" },
+                  { label: "CI", type: "text", placeholder: "Cédula" },
+                  { label: "PLACA", type: "text", placeholder: "Placa" },
+                ].map(({ label, type, placeholder }, index) => (
+                  <div key={index}>
+                    <label className="font-semibold text-gray-900">{label}</label>
+                    <input type={type} className="border w-full p-3 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-400" placeholder={placeholder} />
+                  </div>
+                ))}
+
                 <div>
-                  <label className="font-semibold">NOMBRE</label>
-                  <input type="text" className="border w-full p-2" placeholder="Nombre" />
-                </div>
-                <div>
-                  <label className="font-semibold">CI</label>
-                  <input type="text" className="border w-full p-2" placeholder="Cédula" />
-                </div>
-                <div>
-                  <label className="font-semibold">TIPO VEHÍCULO</label>
-                  <select className="border w-full p-2">
+                  <label className="font-semibold text-gray-900">TIPO VEHÍCULO</label>
+                  <select className="border w-full p-3 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-400">
                     <option>SELECCIONE</option>
                     <option>CARRO</option>
                     <option>CAMIÓN</option>
                     <option>MOTO</option>
                   </select>
                 </div>
-                <div>
-                  <label className="font-semibold">PLACA</label>
-                  <input type="text" className="border w-full p-2" placeholder="Placa" />
-                </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4 mt-4">
+              <div className="grid grid-cols-4 gap-6 mt-6">
+                {[
+                  { label: "LITROS", placeholder: "Litros" },
+                  { label: "MONTO", placeholder: "Monto a pagar" },
+                ].map(({ label, placeholder }, index) => (
+                  <div key={index}>
+                    <label className="font-semibold text-gray-900">{label}</label>
+                    <input type="text" className="border w-full p-3 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-400" placeholder={placeholder} />
+                  </div>
+                ))}
+
                 <div>
-                  <label className="font-semibold">LITROS</label>
-                  <input type="text" className="border w-full p-2" placeholder="Litros" />
-                </div>
-                <div>
-                  <label className="font-semibold">TIPO PAGO</label>
-                  <select className="border w-full p-2">
+                  <label className="font-semibold text-gray-900">TIPO PAGO</label>
+                  <select className="border w-full p-3 rounded-md text-gray-900 focus:ring-2 focus:ring-blue-400">
                     <option>SELECCIONE</option>
                   </select>
                 </div>
                 <div>
-                  <label className="font-semibold">MONTO</label>
-                  <input type="text" className="border w-full p-2" placeholder="Monto a pagar" />
-                </div>
-                <div>
-                  <label className="font-semibold">FECHA</label>
-                  <input type="text" className="border w-full p-2 bg-gray-100" value="18-03-25" readOnly />
+                  <label className="font-semibold text-gray-900">FECHA</label>
+                  <input type="text" className="border w-full p-3 rounded-md bg-gray-100 text-gray-900" value="18-03-25" readOnly />
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4 mt-4">
+              <div className="grid grid-cols-4 gap-6 mt-6">
                 <div>
-                  <label className="font-semibold">HORA</label>
-                  <input type="text" className="border w-full p-2 bg-gray-100" value={hora} readOnly />
+                  <label className="font-semibold text-gray-900">HORA</label>
+                  <input type="text" className="border w-full p-3 rounded-md bg-gray-100 text-gray-900" value={hora} readOnly />
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-between items-center">
-                <p className="text-blue-600">
+              <div className="mt-6 flex justify-between items-center">
+                <p className="text-blue-700 font-medium">
                   Atendido por: <span className="font-semibold">Admin</span> -{" "}
                   <span className="font-semibold">E/S Táchira</span>
                 </p>
                 <div>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded">ACEPTAR</button>
-                  <button className="bg-red-600 text-white px-4 py-2 rounded ml-2">CANCELAR</button>
+                  <button className="bg-blue-600 text-white px-6 py-3 rounded-md text-sm font-semibold hover:bg-opacity-80">ACEPTAR</button>
+                  <button className="bg-red-600 text-white px-6 py-3 rounded-md text-sm font-semibold hover:bg-opacity-80 ml-3">CANCELAR</button>
                 </div>
               </div>
             </div>
@@ -116,27 +117,25 @@ const Page = () => {
 
           {/* Contenedor Tickets Recientes */}
           <div className="w-1/4">
-            <div className="bg-white shadow rounded p-4 text-sm">
-              <h5 className="font-semibold text-lg">Tickets recientes</h5>
-              <div className="flex items-center mt-2">
-                <span className="mr-2">Buscar:</span>
-                <input type="text" className="border p-1 w-full" placeholder="" />
+            <div className="bg-white shadow-lg rounded-lg p-6 text-sm">
+              <h5 className="font-bold text-gray-900 text-lg">Tickets recientes</h5>
+              <div className="flex items-center mt-3">
+                <span className="mr-2 text-gray-900 font-semibold">Buscar:</span>
+                <input type="text" className="border p-2 w-full rounded-md text-gray-900 focus:ring-2 focus:ring-blue-400" placeholder="" />
               </div>
-              <table className="border w-full mt-2 text-sm">
+              <table className="border w-full mt-3 text-sm">
                 <thead>
                   <tr>
-                    <th className="border p-1 text-left">TICKETS RECIENTES</th>
+                    <th className="border p-3 text-left text-gray-900 font-semibold bg-gray-200">TICKETS RECIENTES</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border p-1 text-center text-gray-500">
-                      Ningún dato disponible
-                    </td>
+                    <td className="border p-3 text-center text-gray-500">Ningún dato disponible</td>
                   </tr>
                 </tbody>
               </table>
-              <p className="text-gray-500 text-xs mt-2">Registros 0</p>
+              <p className="text-gray-500 text-xs mt-3">Registros 0</p>
             </div>
           </div>
         </div>
